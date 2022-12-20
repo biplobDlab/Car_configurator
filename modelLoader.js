@@ -19,51 +19,51 @@ let material;
 // for dinamic chage it to list or arrey or struct list
 const Seat = {
   'texture1': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V1.png',// change it ot public link
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Seat_BC_V1.jpg',// change it ot public link
     name: 'Blue',
     uid: null
   },
   'texture2': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V2.png',
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Seat_BC_V2.jpg',
     name: 'Black',
     uid: null
   },
   'texture3': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V3.png',
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Seat_BC_v3.jpg',
     name: 'Red',
     uid: null
   }
 };
 const Headliner = {
   'texture1': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V1.png',// change it ot public link
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Headliner_BC_V1.jpg',// change it ot public link
     name: 'Blue',
     uid: null
   },
   'texture2': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V2.png',
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Headliner_BC_V2.jpg',
     name: 'Black',
     uid: null
   },
   'texture3': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V3.png',
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Headliner_BC_V3.jpg',
     name: 'Red',
     uid: null
   }
 };
 const Midliner = {
   'texture1': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V1.png',// change it ot public link
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Midliner_BC_V1.jpg',// change it ot public link
     name: 'Blue',
     uid: null
   },
   'texture2': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V2.png',
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Midliner_BC_V2.jpg',
     name: 'Black',
     uid: null
   },
   'texture3': {
-    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V3.png',
+    url: 'https://raw.githubusercontent.com/biplobDlab/Car_configurator/main/images/carcolor/Textures/Int_Midliner_BC_V3.jpg',
     name: 'Red',
     uid: null
   }
@@ -254,13 +254,55 @@ function rimCheck(e) {
 
 }
 
+function colorConfig(e, t) {
+  
+  var n = 2.4;
+  function a(e) {
+      var t = 0;
+      return e < .04045 ? e >= 0 && (t = e * (1 / 12.92)) : t = Math.pow((e + .055) * (1 / 1.055), n),
+      t
+  }
+  t.srgbToLinear = function(e, t) {
+      var r = t || new Array(e.length);
+      if (!(e.length > 2 && e.length < 5))
+          throw new Error("Invalid color. Expected 3 or 4 components, but got " + e.length);
+      return r[0] = a(e[0]),
+      r[1] = a(e[1]),
+      r[2] = a(e[2]),
+      r.length > 3 && e.length > 3 && (r[3] = e[3]),
+      r
+  }
+  ,
+  t.hexToRgb = function(e) {
+      var t = e.match(/^#([0-9a-f]{6})$/i);
+      if (t)
+      
+          return [parseInt(t[1].substr(0, 2), 16) / 255, parseInt(t[1].substr(2, 2), 16) / 255, parseInt(t[1].substr(4, 2), 16) / 255];
+      throw new Error("Invalid color: " + e)
+  }
+
+}
+function hexToRgb(e) {
+  var t = e.match(/^#([0-9a-f]{6})$/i);
+  if (t)
+  
+      return [parseInt(t[1].substr(0, 2), 16) / 256, parseInt(t[1].substr(2, 2), 16) / 256, parseInt(t[1].substr(4, 2), 16) / 256];
+  throw new Error("Invalid color: " + e)
+}
 
 function ChangeColor(color) {
-  
-  let mat = allMatrials[0];
+  // var sketchfabAPIUtility = new SketchfabAPIUtility(uid,  document.getElementById('api-frame'), onSketchfabUtilityReady);
+  // function onSketchfabUtilityReady() {
 
-  mat.channels.AlbedoPBR.color =color;
+  //   sketchfabAPIUtility.setColor("CarPaint", sketchfabAPIUtility.AlbedoPBR, color);
+   
+   
+  //  };
+  let mat = allMatrials[0];
+  var a =  
+  mat.channels.AlbedoPBR.color =hexToRgb(color);
   mat.channels.AlbedoPBR.enable = true;
+  console.log(mat.channels.AlbedoPBR.color);
   
   apiSkfb.setMaterial(mat, () => { });
 }
@@ -318,7 +360,6 @@ function OpenGates(value) {
           //clearInterval(openAnimaton);
           animaitonRunning = false;
         }
-
       });
     }, 7);
   }

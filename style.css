@@ -341,8 +341,7 @@
 }
 
 @media screen and (max-width: 479px) {
-
-  /* start of phone styles */
+/* start of phone styles */
   .fullFrameContainer {
     aspect-ratio: 4/5;
   }
