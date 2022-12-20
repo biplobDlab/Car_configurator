@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="ToggleButton.css">
   <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.3/dat.gui.min.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -35,23 +35,23 @@
         </div>
         <div class="row text-left pt-xl-5 pt-lg-1">
           <div class="row">
-            <p class="subTitle">Suxuki Bike</p>
+            <p class="subTitle">Luxury Sports Sedan</p>
           </div>
         </div>
         <!-- Collor selector -->
         <div class="row pt-xl-3 pt-lg-2">
           <div class="row">
 
-            <p class="subTitle2">upholstery texture</p>
+            <p class="subTitle2">texture</p>
 
             <div class="d-flex d-md-block ">
-              <button id="texture1" class="texture-button" style="border: solid 5px rgba(255, 255, 255, 1);"
+              <button id="texture1" class="texture-button t1" style="border: solid 5px rgba(255, 255, 255, 1);"
                 onclick="textureCheck(this)">
               </button>
-              <button id="texture2" class="texture-button" style="border: solid 5px rgba(255, 255, 255,0);"
+              <button id="texture2" class="texture-button t2" style="border: solid 5px rgba(255, 255, 255,0);"
                 onclick="textureCheck(this)">
               </button>
-              <button id="texture3" class="texture-button" style="border: solid 5px rgba(255, 255, 255,0);"
+              <button id="texture3" class="texture-button t3" style="border: solid 5px rgba(255, 255, 255,0);"
                 onclick="textureCheck(this)">
               </button>
             </div>
@@ -62,19 +62,19 @@
 
             <div class="d-flex d-md-block ">
 
-              <button id="color1" class="color-button" type="button" style="border: solid 3px rgba(255, 255, 255, 1);"
-                onclick="colorCheck(this)" value="#ffffff">
-                <i class="fa fa-check align-self-center text-light" aria-hidden="true" style="opacity: 1;"
+              <button id="color1" class="color-button v1" type="button"
+                style="border: solid 3px rgba(255, 255, 255, 1);" onclick="colorCheck(this)" color="#00607B">
+                <i class="fa fa-check align-self-center text-dark" aria-hidden="true" style="opacity: 1;"
                   id="color1-child"></i>
               </button>
-              <button id="color2" class="color-button" type="button" style="border: solid 3px rgba(255, 255, 255, 0);"
-                onclick="colorCheck(this)" value="#4287f5">
-                <i class="fa fa-check align-self-center text-light" aria-hidden="true" style="opacity: 0;"
+              <button id="color2" class="color-button v2" type="button"
+                style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color="#404950">
+                <i class="fa fa-check align-self-center text-dark" aria-hidden="true" style="opacity: 0;"
                   id="color2-child"></i>
               </button>
-              <button id="color3" class="color-button" type="button" style="border: solid 3px rgba(255, 255, 255, 0);"
-                onclick="colorCheck(this)" value="#f59842">
-                <i class="fa fa-check align-self-center text-light " aria-hidden="true" style="opacity: 0;"
+              <button id="color3" class="color-button v3" type="button"
+                style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color="#000000">
+                <i class="fa fa-check align-self-center text-dark " aria-hidden="true" style="opacity: 0;"
                   id="color3-child"></i>
               </button>
             </div>
@@ -85,7 +85,8 @@
 
             <div class="d-flex ">
 
-              <div id="rim1" class="rim-button" type="button" onclick="rimCheck(this)" value_id="57" style="opacity: 1;">
+              <div id="rim1" class="rim-button m-2" type="button" onclick="rimCheck(this)" value_id="74"
+                style="opacity: 1;">
                 <div class="d-flex">
                   <div class="col-8 d-flex justify-content-center">
                     <img src="./images/01_17MSS546.png" class="rim-img " id="rim1-child">
@@ -96,20 +97,22 @@
                 </div>
 
               </div>
-              <div id="rim2" class="rim-button" type="button" onclick="rimCheck(this)" value_id="41" style="opacity: .4;">
+              <div id="rim2" class="rim-button m-2" type="button" onclick="rimCheck(this)" value_id="41"
+                style="opacity: .4;">
                 <div class="d-flex">
                   <div class="col-8 d-flex justify-content-center">
-                    <img src="./images/01_17MSS546.png" class="rim-img " id="rim2-child">
+                    <img src="./images/02_17MSS547.png" class="rim-img " id="rim2-child">
                   </div>
                   <div class="col-4 side-titel">
                     <h3 class="rim-text">2</h3>
                   </div>
                 </div>
               </div>
-              <div id="rim3" class="rim-button" type="button" onclick="rimCheck(this)" value_id="22" style=" opacity: .4;">
+              <div id="rim3" class="rim-button m-2" type="button" onclick="rimCheck(this)" value_id="58"
+                style=" opacity: .4;">
                 <div class="d-flex">
                   <div class="col-8 d-flex justify-content-center">
-                    <img src="./images/01_17MSS546.png" class="rim-img " id="rim3-child">
+                    <img src="./images/03_17DSS549.png" class="rim-img " id="rim3-child">
                   </div>
                   <div class="col-4 side-titel">
                     <h3 class="rim-text">3</h3>
@@ -140,35 +143,113 @@
         </iframe>
 
         <!-- Tab view buttons -->
-        <div class="row d-lg-none d-md-block mt-3">
-          <!-- Collor selector -->
+        <div class="row d-lg-none d-md-block">
+          <div class="d-flex text-left pt-md-2">
+            <p class="subTitle mt-3">Luxury Sports Sedan</p>
+          </div>
           <div class="col-12">
-            <div class="row pt-3">
-              <div class="d-flex justify-content-center">
-                <button id="texture-green-orange1" class="texture-green-orange texture-button  btn-info" type="button"
-                  onclick="displeCheck(this)">
-                  <img src="./images/Check.png" height="30px" width="30px" style="opacity: 1;"
-                    id="texture-green-orange1-child">
-                  <!-- <i class="fa fa-check" id="texture-green-orange1-child" style="font-size:20px;color:white; display:block"></i> -->
+
+            <div class="d-flex">
+              <button class="col-4 subtitelsection selected" type="button" id="TextureSection">
+                <p class="subTitle2">texture</p>
+              </button>
+              <button class="col-4 subtitelsection" type="button" id="BodyPainSection">
+                <p class="subTitle2">Body Paint</p>
+              </button>
+              <button class="col-4 subtitelsection" type="button" id="RimSection">
+                <p class="subTitle2">Rim</p>
+              </button>
+            </div>
+
+            <div class="d-flex pt-5">
+              <!-- texture selector -->
+              <div class="d-flex w-100 justify-content-center px-5 " id="TextureButotnContainer">
+                <button id="texture1" class="texture-button t1 mx-md-5 mx-sm-5"
+                  style="border: solid 5px rgba(255, 255, 255, 1);" onclick="textureCheck(this)">
                 </button>
-                <button id="texture-yellow-blue1" class="texture-yellow-blue 
-                texture-button  btn-secondary" type="button" onclick="displeCheck(this)">
-                  <img src="../images/Check.png" height="30px" width="30px" style="opacity: 0;"
-                    id="texture-yellow-blue1-child">
-                  <!-- <i class="fa fa-check" id="texture-yellow-blue1-child" style="font-size:20px;color:white; display:none "></i> -->
+                <button id="texture2" class="texture-button t2 mx-md-5 mx-sm-5"
+                  style="border: solid 5px rgba(255, 255, 255,0);" onclick="textureCheck(this)">
                 </button>
-                <button id="texture-red-purple1" class="texture-red-purple texture-button  btn-danger" type="button"
-                  onclick="displeCheck(this)">
-                  <img src="./images/Check.png" height="30px" width="30px" style="opacity: 0;"
-                    id="texture-red-purple1-child">
-                  <!-- <i class="fa fa-check" id="texture-red-purple1-child" style="font-size:20px;color:white; display:none"></i> -->
+                <button id="texture3" class="texture-button t3 mx-md-5 mx-sm-5"
+                  style="border: solid 5px rgba(255, 255, 255,0);" onclick="textureCheck(this)">
                 </button>
               </div>
+
+
+              <!-- Collor selector -->
+              <div class="d-flex w-100 justify-content-center d-none" id="BodyPainButotnContainer">
+                <!-- <button id="texture1" class="texture-button t1 mx-5" style="border: solid 5px rgba(255, 255, 255, 1);"
+                  onclick="textureCheck(this)" >
+                </button>
+                <button id="texture2" class="texture-button t2 mx-5" style="border: solid 5px rgba(255, 255, 255,0);"
+                  onclick="textureCheck(this)">
+                </button>
+                <button id="texture3" class="texture-button t3 mx-5" style="border: solid 5px rgba(255, 255, 255,0);"
+                  onclick="textureCheck(this)">
+                </button> -->
+                <button id="color4" class="color-button v1 mx-md-5 mx-sm-5"
+                  style="border: solid 3px rgba(255, 255, 255, 1);" onclick="colorCheck(this)" color="#00607B">
+                  <i class="fa fa-check align-self-center text-dark" aria-hidden="true" style="opacity: 1;"
+                    id="color4-child"></i>
+                </button>
+
+                <button id="color5" class="color-button v2 mx-md-5 mx-sm-5"
+                  style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color="#404950">
+                  <i class="fa fa-check align-self-center text-dark" aria-hidden="true" style="opacity: 0;"
+                    id="color5-child"></i>
+                </button>
+                <button id="color6" class="color-button v3 mx-md-5 mx-sm-5"
+                  style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color="#000000">
+                  <i class="fa fa-check align-self-center text-dark " aria-hidden="true" style="opacity: 0;"
+                    id="color6-child"></i>
+                </button>
+
+              </div>
+
+              <!-- Rim selector -->
+              <div class="d-flex w-100 justify-content-center d-none" id="RimButotnContainer">
+
+                <div id="rim1" class="rim-button mx-md-5 mx-sm-5" type="button" onclick="rimCheck(this)" value_id="57"
+                  style="opacity: 1;">
+                  <div class="d-flex">
+                    <div class="col-8 d-flex justify-content-center">
+                      <img src="./images/01_17MSS546.png" class="rim-img " id="rim1-child">
+                    </div>
+                    <div class="col-4 side-titel">
+                      <h3 class="rim-text">1</h3>
+                    </div>
+                  </div>
+
+                </div>
+                <div id="rim2" class="rim-button mx-md-5 mx-sm-5" type="button" onclick="rimCheck(this)" value_id="41"
+                  style="opacity: .4;">
+                  <div class="d-flex">
+                    <div class="col-8 d-flex justify-content-center">
+                      <img src="./images/01_17MSS546.png" class="rim-img " id="rim2-child">
+                    </div>
+                    <div class="col-4 side-titel">
+                      <h3 class="rim-text">2</h3>
+                    </div>
+                  </div>
+                </div>
+                <div id="rim3" class="rim-button mx-md-5 mx-sm-5" type="button" onclick="rimCheck(this)" value_id="22"
+                  style=" opacity: .4;">
+                  <div class="d-flex">
+                    <div class="col-8 d-flex justify-content-center">
+                      <img src="./images/01_17MSS546.png" class="rim-img " id="rim3-child">
+                    </div>
+                    <div class="col-4 side-titel">
+                      <h3 class="rim-text">3</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
-            <div class="row mt-4">
+            <div class="row m-4">
               <!-- animation toggle button -->
-              <div class="d-flex justify-content-center text-center pr-3 pt-xl-5 pt-lg-4">
-                <p class="animatonTitel pt-lg-1">Rotate Animations &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <div class="d-flex justify-content-center text-center pr-3 pt-xl-5 pt-lg-4 ">
+                <p class="animatonTitel ">Rotate Animations &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <div class="d-flex justify-content-start p-1">
                   <label class="switch">
                     <input id="toggle" type="checkbox" value="true" checked>
@@ -177,15 +258,7 @@
                 </div>
               </div>
             </div>
-            <div class="row text-left px-md-5 pt-md-2">
-              <div class="row">
-                <p class="subTitle">Suxuki Bike</p>
-              </div>
-              <div class="row ">
-                <p class="para col-12">The full passage of standard Lorem Ipsum copy is:
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-              </div>
-            </div>
+
           </div>
 
 

@@ -1,7 +1,7 @@
 // Sketchfab Viewer API: Start/Stop/Control Animation
 
 var version = '1.12.1';
-var uid = '1f2c28b1e69a4565b9fe5ced1cb556f3';
+var uid = '778e73c5af874b6599b846c446aebc19';
 var iframe = document.getElementById('api-frame');
 var client = new window.Sketchfab(version, iframe);
 
@@ -17,7 +17,41 @@ let material;
 
 
 // for dinamic chage it to list or arrey or struct list
-const textures = {
+const Seat = {
+  'texture1': {
+    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V1.png',// change it ot public link
+    name: 'Blue',
+    uid: null
+  },
+  'texture2': {
+    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V2.png',
+    name: 'Black',
+    uid: null
+  },
+  'texture3': {
+    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V3.png',
+    name: 'Red',
+    uid: null
+  }
+};
+const Headliner = {
+  'texture1': {
+    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V1.png',// change it ot public link
+    name: 'Blue',
+    uid: null
+  },
+  'texture2': {
+    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V2.png',
+    name: 'Black',
+    uid: null
+  },
+  'texture3': {
+    url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V3.png',
+    name: 'Red',
+    uid: null
+  }
+};
+const Midliner = {
   'texture1': {
     url: 'https://raw.githubusercontent.com/BiplobModak/ProductConfigurator/main/images/BodyPaint_ABS_BaseColor_V1.png',// change it ot public link
     name: 'Blue',
@@ -72,61 +106,47 @@ var success = function success(api) {
         console.log(animations);
         animationsList = animations;
         api.pause();
-
-        // if (animations.length > 0) {
-        //   current_anim = 0;
-        //   api.setCurrentAnimationByUID(animations[current_anim][0]);
-        //   duration = animations[current_anim][2];
-
-        //   isSeeking = false;
-
-        //   timeSlider = document.getElementById('timeSlider');
-
-        //   _pollTime();
-
-        //   timeSlider.addEventListener('change', function () {
-        //     isSeeking = false;
-        //     api.play();
-        //   });
-
-        //   timeSlider.addEventListener('input', function () {
-        //     isSeeking = true;
-        //     var time = duration * timeSlider.value / 100;
-        //     api.pause();
-        //     api.seekTo(time, function () {
-        //       api.play();
-        //     });
-        //   });
-        // }
       });
 
       api.getMaterialList((err, materials) => {
         material = materials[5]; // There's only one material in this case
         allMatrials = materials;
+        console.log(allMatrials[0].channels.AlbedoPBR.color);
         console.log(allMatrials);
 
-        for (const texture in textures) {
-          api.addTexture(textures[texture].url, (err, uid) => {
+        for (const texture in Seat) {
+          api.addTexture(Seat[texture].url, (err, uid) => {
             if (!err) {
-              textures[texture].uid = uid;
+              Seat[texture].uid = uid;
 
-              window.console.log(`Registered new texture, ${textures[texture].name}, uid: ${uid}`);
+              window.console.log(`Registered new texture, ${Seat[texture].name}, uid: ${uid}`);
 
-              var elements = document.getElementsByClassName(`texture-${texture}`);
-              // for (var i = 0; i < elements.length; i++) {
-              //   elements[i].addEventListener('click', () => {
+              //var elements = document.getElementsByClassName(`texture-${texture}`);
+              
+            }
+          });
+        }
+        for (const texture in Midliner) {
+          api.addTexture(Midliner[texture].url, (err, uid) => {
+            if (!err) {
+              Midliner[texture].uid = uid;
 
-              //     let materialToUpdate = material;
-              //     materialToUpdate.channels.AlbedoPBR.texture.uid = textures[texture].uid;
-              //     materialToUpdate.channels.AlbedoPBR.enable = true;
-              //     console.log("matrialCheck");
-              //     //displeCheck(elements[i]);
-              //     api.setMaterial(materialToUpdate, () => {
+              window.console.log(`Registered new texture, ${Midliner[texture].name}, uid: ${uid}`);
 
+              //var elements = document.getElementsByClassName(`texture-${texture}`);
+              
+            }
+          });
+        }
+        for (const texture in Headliner) {
+          api.addTexture(Headliner[texture].url, (err, uid) => {
+            if (!err) {
+              Headliner[texture].uid = uid;
 
-              //     });
-              //   });
-              // }
+              window.console.log(`Registered new texture, ${Headliner[texture].name}, uid: ${uid}`);
+
+              //var elements = document.getElementsByClassName(`texture-${texture}`);
+              
             }
           });
         }
@@ -155,59 +175,9 @@ var success = function success(api) {
 
       }
 
-      // check ids.
-      // document.getElementById('play').addEventListener('click', function () {
-      //   api.play();
-      // });
-      // document.getElementById('pause').addEventListener('click', function () {
-      //   api.pause();
-      // });
-      // document.getElementById('pingpong').addEventListener('click', function () {
-      //   pingpong = !pingpong;
-      // });
-
-      // document.getElementById('previous').addEventListener('click', function () {
-      //   if (current_anim === 0) current_anim = animationsList.length;
-      //   current_anim--;
-      //   api.setCurrentAnimationByUID(animationsList[current_anim][0]);
-      //   api.seekTo(0);
-      //   duration = animationsList[current_anim][2];
-      //   console.log(duration);
-      // });
-
-      // document.getElementById('next').addEventListener('click', function () {
-      //   current_anim++;
-      //   if (current_anim === animationsList.length) current_anim = 0;
-      //   api.setCurrentAnimationByUID(animationsList[current_anim][0]);
-      //   api.seekTo(0);
-      //   duration = animationsList[current_anim][2];
-      //   console.log(duration);
-      // });
-
-      // api.addEventListener('animationChange', function (a) {
-      //   current_anim = 0;
-
-      //   for (var i = 0; i < animationsList.length; i++) {
-      //     if (animationsList[i][0] === a) {
-      //       duration = animationsList[i][2];
-      //       current_anim = i;
-      //       break;
-      //     }
-      //   }
-
-      //   console.log('animationChange', a);
-      // });
-
       api.addEventListener('animationEnded', function () {
         api.pause();
       });
-      // api.addEventListener('animationPlay', function () {
-      //   console.log('animationPlay');
-      // });
-      // api.addEventListener('animationStop', function () {
-      //   console.log('animationStop');
-      // });
-
     });
   });
 };
@@ -232,7 +202,9 @@ function colorCheck(e) {
     if (currentid === text) {
       e.style.border = "solid 3px rgba(255, 255, 255, 1)";
       document.getElementById(text + "-child").style.opacity = 1;
-      ChangeColor(e.value);
+      //convert
+      console.log(e.getAttribute("color"));
+      ChangeColor(e.getAttribute("color"));
     }
     else {
       buttons[j].style.border = "solid 3px rgba(255, 255, 255, 0)";
@@ -249,8 +221,10 @@ function textureCheck(e) {
     var currentid = buttons[j].id;
     if (currentid === text) {
       e.style.border = "solid 5px rgba(224, 218, 218, 1)";
-      var temp_uid = textures[e.id];
-      ChangeTexture(temp_uid);
+      var Seat_uid = Seat[e.id];
+      var headliner_uid = Headliner[e.id];
+      var midliner_uid = Midliner[e.id];
+      ChangeTexture(Seat_uid, headliner_uid, midliner_uid);
     }
     else {
       buttons[j].style.border = "solid 5px rgba(224, 218, 218, 0)";
@@ -261,47 +235,52 @@ function textureCheck(e) {
 
 function rimCheck(e) {
   var text = e.id;
-  
+
   var buttons = document.getElementsByClassName("rim-button");
   for (let j = 0; j < buttons.length; j++) {
     var currentid = buttons[j].id;
     if (currentid === text) {
       e.style.opacity = 1;
       //console.log(e.value);
-      var value = e.getAttribute("value_id")
+      var value = e.getAttribute("value_id");
       showRim(value);
     }
     else {
       buttons[j].style.opacity = .5;
-      var value = buttons[j].getAttribute("value_id")
+      var value = buttons[j].getAttribute("value_id");
       hideRim(value);
     }
   }
 
 }
 
-function ChangeColor(color) {
-  let materialToUpdate = allMatrials[3];
-  materialToUpdate.channels.AlbedoPBR.color = color;
-  materialToUpdate.channels.AlbedoPBR.enable = true;
-  apiSkfb.setMaterial(materialToUpdate, () => { });
-}
-function ChangeTexture(uid) {
-  let mat1 = allMatrials[7];
-  
-  let mat2 = allMatrials[1];
-  let mat3 = allMatrials[4]
 
-  mat1.channels.AlbedoPBR.texture.uid = uid;
+function ChangeColor(color) {
+  
+  let mat = allMatrials[0];
+
+  mat.channels.AlbedoPBR.color =color;
+  mat.channels.AlbedoPBR.enable = true;
+  
+  apiSkfb.setMaterial(mat, () => { });
+}
+
+function ChangeTexture(uid1, uid2, uid3) {
+  let mat1 = allMatrials[1];
+
+  let mat2 = allMatrials[9];
+  let mat3 = allMatrials[3]
+
+  mat1.channels.AlbedoPBR.texture.uid = uid1;
   mat1.channels.AlbedoPBR.enable = true;
   apiSkfb.setMaterial(mat1, () => { });
-  
-  mat2.channels.AlbedoPBR.texture.uid = uid;
+
+  mat2.channels.AlbedoPBR.texture.uid = uid2;
   mat2.channels.AlbedoPBR.enable = true;
   apiSkfb.setMaterial(mat2, () => { });
-  
-  mat3.channels.AlbedoPBR.texture.uid = uid;
-  mat3.channels.AlbedoPBR.enable = true; 
+
+  mat3.channels.AlbedoPBR.texture.uid = uid3;
+  mat3.channels.AlbedoPBR.enable = true;
   apiSkfb.setMaterial(mat3, () => { });
 }
 function showRim(id) {
@@ -321,55 +300,81 @@ function hideRim(id) {
 }
 
 var animaitonRunning = false;
-function OpenGates(value)
-{
-  if(animaitonRunning)
-  {
+function OpenGates(value) {
+  if (animaitonRunning) {
     return;
   }
 
-  var animetion = animationsList[0];  
-  apiSkfb.setCurrentAnimationByUID(animetion[0]);
   //get animation
-  if(value)
-  {
+  if (value) {
     //close
-    apiSkfb.seekTo(0);
+    apiSkfb.setCurrentAnimationByUID(animationsList[0]);
     apiSkfb.play();
     animaitonRunning = true;
-    opened = false;
     openAnimation = setInterval(() => {
-      apiSkfb.getCurrentTime(function(err, time)
-      {
-        if(time > 4)
-        {
+      apiSkfb.getCurrentTime(function (err, time) {
+        if (time > 4) {
           apiSkfb.pause();
           //clearInterval(openAnimaton);
           animaitonRunning = false;
         }
 
-      });      
+      });
     }, 7);
   }
-  else
-  {
+  else {
     //open
-    apiSkfb.seekTo(4);
+    apiSkfb.setCurrentAnimationByUID(animationsList[1]);
     apiSkfb.play();
     animaitonRunning = true;
-    closeAnimation = setInterval(() => 
-    {
-      apiSkfb.getCurrentTime(function(err, time){
-        if(time >= 7)
-        {
+    closeAnimation = setInterval(() => {
+      apiSkfb.getCurrentTime(function (err, time) {
+        if (time >= 7) {
           apiSkfb.pause();
           //clearInterval(closeAnimation);
           animaitonRunning = false;
         }
       });
-      
+
     }, 7);
 
     //sick to 0 time
   }
 }
+
+
+
+
+$("#TextureSection").click(
+  function textureActivate() {
+    $("#TextureSection").addClass('selected');
+    $("#BodyPainSection").removeClass('selected')
+    $("#RimSection").removeClass('selected');
+
+    $("#BodyPainButotnContainer").addClass('d-none');
+    $("#RimButotnContainer").addClass('d-none');
+    $("#TextureButotnContainer").removeClass('d-none');
+    return
+  });
+
+$("#RimSection").click(
+  function RimActivate() {
+    $("#TextureSection").removeClass('selected');
+    $("#BodyPainSection").removeClass('selected')
+    $("#RimSection").addClass('selected');
+    $("#BodyPainButotnContainer").addClass('d-none');
+    $("#RimButotnContainer").removeClass('d-none');
+    $("#TextureButotnContainer").addClass('d-none');
+    return
+  });
+
+$("#BodyPainSection").click(
+  function paintActivate() {
+    $("#TextureSection").removeClass('selected');
+    $("#BodyPainSection").addClass('selected')
+    $("#RimSection").removeClass('selected');
+    $("#BodyPainButotnContainer").removeClass('d-none');
+    $("#RimButotnContainer").addClass('d-none');
+    $("#TextureButotnContainer").addClass('d-none');
+    return
+  });
