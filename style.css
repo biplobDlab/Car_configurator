@@ -200,7 +200,10 @@
   .tabbuttonView {
     display: none;
   }
-
+  .rim-button {
+    aspect-ratio: 83/54;
+    /*rox-shadow: 0 8px 16px 0 rgba(155, 144, 255, 0.2), 0 6px 20px 0 rgba(96, 152, 255, 0.3);*/
+  }
 
 }
 
@@ -263,7 +266,10 @@
     display: none;
   }
 
-  
+  .rim-button {
+    aspect-ratio: 83/54;
+    /*rox-shadow: 0 8px 16px 0 rgba(155, 144, 255, 0.2), 0 6px 20px 0 rgba(96, 152, 255, 0.3);*/
+  }
 
 }
 
@@ -316,7 +322,6 @@
     width: 50px;
     aspect-ratio: 1;
   }
-
 }
 
 @media screen and (max-width: 767px) {
