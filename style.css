@@ -1,0 +1,395 @@
+.fullFrameContainer {
+  width: 100%;
+  height: unset;
+  aspect-ratio: 22/9;
+  font-family: 'Encode Sans';
+}
+
+.modelviewer {
+  height: unset;
+  width: 100%;
+  aspect-ratio: 16/10;
+}
+
+.controlviewer {
+  background-color: #131B26;
+}
+
+.pageBackground {
+  background-color: #131B26;
+}
+
+.title {
+  text-align: center;
+  text-decoration: solid;
+  font-size: 32px;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: white;
+}
+
+.subTitle {
+  text-align: left;
+  text-decoration: solid;
+  font-size: 28px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: white;
+}
+.subTitle2 {
+  text-align: left;
+  text-decoration: solid;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: white;
+}
+
+
+.para {
+  color: rgb(107, 103, 103);
+  text-align: left;
+  text-decoration: solid;
+  font-size: 20px;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.animatonTitel {
+  color: rgb(240, 227, 227);
+  text-align: center;
+  font-size: 18px;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.buttonviewer {
+  height: unset;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+
+.tabAnimationToggle {
+  display: none;
+}
+
+.texture-button {
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  aspect-ratio: 1;
+}
+
+/* not used*/
+.color-button {
+  display: inline-flex;
+  height: 35px;
+  width: 35px;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  overflow: hidden;
+  margin: 5px;
+
+}
+.color-button i{
+  margin-top: 3px;
+  margin-left: 1px;
+
+}
+
+.rim-button {
+  display: block;
+  background-color: #3C454A;
+  height: 54px;
+  width: 83px;
+  border-radius: 10px 0px 0px 10px;
+  overflow: hidden;
+  margin-left: 10px;
+  box-shadow: 0 8px 16px 0 rgba(155, 144, 255, 0.2), 0 6px 20px 0 rgba(96, 152, 255, 0.3);
+}
+
+.rim-img {
+  margin: 7px;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+}
+
+.side-titel {
+  background-color: #0C1118;
+}
+
+.rim-text {
+  margin-top: 10px;
+  margin-left: 5px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  color: #FFFFFF;
+}
+
+#color1
+{
+  background-color: #C1151C;
+}
+#color2
+{
+  background-color: #0013BF;;
+}
+#color3
+{
+  background-color: #FECB86;
+}
+#texture1
+{
+  background-color: #C4C4C4;
+}
+#texture2
+{
+  background-color: #000000;
+}
+#texture3
+{
+  background-color: #FECB86;
+}
+
+.tabbuttonView {
+  display: none;
+}
+
+/* start of desktop styles */
+
+@media screen and (max-width: 1399px) {
+
+  /* start of large tablet styles */
+  .fullFrameContainer {
+    background-color: #131B26;
+  }
+
+  .modelviewer {
+    background-color: #131B26;
+  }
+
+  .buttonHolder {
+    height: auto;
+    width: auto;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subTitle {
+    font-size: 24px;
+  }
+
+  .para {
+    font-size: 16px;
+  }
+
+  .animatonTitel {
+    font-size: 14px;
+  }
+
+  .tabbuttonView {
+    display: none;
+  }
+
+
+}
+
+
+@media screen and (max-width: 1024px) {
+
+  /* start of large tablet styles */
+  .fullFrameContainer {
+    background-color: #131B26;
+  }
+
+  .modelviewer {
+    width: 100%;
+    height: unset;
+    background-color: #131B26;
+  }
+
+  .buttonHolder {
+    height: auto;
+    width: auto;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subTitle {
+    font-size: 24px;
+  }
+
+  .para {
+    font-size: 16px;
+  }
+
+  .animatonTitel {
+    font-size: 14px;
+  }
+
+  .tabbuttonView {
+    display: none;
+  }
+
+
+}
+
+@media screen and (max-width: 991px) {
+
+  /* start of large tablet styles */
+  .fullFrameContainer {
+    aspect-ratio: 4/5;
+    background-color: #131B26;
+  }
+
+  .modelviewer {
+    background-color: #131B26;
+  }
+
+  .buttonHolder {
+    height: auto;
+    width: auto;
+  }
+
+  .title {
+    margin: 20px;
+    font-size: 28px;
+  }
+
+  .subTitle {
+    font-size: 24px;
+  }
+
+  .para {
+    font-size: 18px;
+  }
+
+  .animatonTitel {
+    font-size: 18px;
+  }
+
+  .tabbuttonView {
+    display: none;
+  }
+
+  .texture-button {
+    height: 40px;
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+  }
+
+  .texture-button img {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  /* start of medium tablet styles */
+  .fullFrameContainer {
+    aspect-ratio: 3/4;
+    background-color: #131B26;
+  }
+
+  .modelviewer {
+    aspect-ratio: 2/1;
+  }
+
+  .controlviewer {
+    display: none;
+  }
+
+  .tabAnimationToggle {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 479px) {
+
+  /* start of phone styles */
+  .fullFrameContainer {
+    aspect-ratio: 4/5;
+  }
+
+  .tabbuttonView {
+    display: none;
+  }
+
+  .modelviewer {
+    height: unset;
+    width: 100%;
+    aspect-ratio: 16/10;
+  }
+
+  .title {
+    margin: 10px;
+    text-align: center;
+    text-decoration: solid;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: white;
+  }
+
+  .subTitle {
+    text-align: left;
+    text-decoration: solid;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-left: 20px;
+    color: white;
+  }
+
+
+  .para {
+    color: rgb(107, 103, 103);
+    text-align: left;
+    text-decoration: solid;
+    font-size: 14px;
+    text-transform: none;
+    font-weight: normal;
+    margin-left: 20px;
+  }
+
+  .animatonTitel {
+    color: rgb(240, 227, 227);
+    text-align: center;
+    font-size: 14px;
+    text-transform: none;
+    font-weight: normal;
+  }
+
+  .buttonviewer {
+    height: unset;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+
+  .tabAnimationToggle {
+    display: none;
+  }
+
+  .texture-button {
+    height: 40px;
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+  }
+
+  .texture-button img {
+    height: 20px;
+    width: 20px;
+  }
+}
