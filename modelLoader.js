@@ -119,22 +119,25 @@ var success = function success(api) {
       ////////////////////////////////////////////
       // ANIMATION: WAIT FOR LOADING ////////////
       //////////////////////////////////////////
+
+      // hide on click
+
+
+
       api.getAnimations(function (err, animations) {
         console.log(animations);
         animationsList = animations;
-        current_anim = 1;
         api.pause();
         var checkbox = document.querySelectorAll('input[type="checkbox"]');
         for (let j = 0; j < checkbox.length; j++) {
           checkbox[j].addEventListener('change', function () {
-            if (checkbox[j].checked) 
-            {
-              changeAnimation(1);
+            if (checkbox[j].checked) {
+              //process.exit(0);
+              changeAnimation(1, checkbox[j]);
             }
-            else 
-            {
-              changeAnimation(0);
-              
+            else {
+              //process.exit(0);
+              changeAnimation(0, checkbox[j]);
             }
           });
         }
@@ -192,7 +195,7 @@ var success = function success(api) {
       });
       // Animations start here
       api.addEventListener('animationEnded', function () {
-        
+
       });
     });
   });
@@ -388,15 +391,38 @@ $("#BodyPainSection").click(
     return
   });
 
-  function changeAnimation(index) {
-  
-    current_anim = index;
-    apiSkfb.setCurrentAnimationByUID(animationsList[index][0]);
-    duration = animationsList[index][2];
-    apiSkfb.seekTo(0);
-    apiSkfb.play()
-    setTimeout(() => {
-        apiSkfb.pause();
-        animationChangePlay = false;
-      }, duration * 1000);
+
+
+var animationChangePlay = false;
+function changeAnimation(index, checkbox) {
+
+  if(animationChangePlay)
+  {
+    var check = checkbox.checked;
+    console.log(check);
+    checkbox.checked = !check;
+    checkbox.click();
+    console.log(checkbox.checked);
+    console.log("Returing");
+    return;
   }
+  current_anim = index;
+  apiSkfb.setCurrentAnimationByUID(animationsList[index][0]);
+  animationChangePlay = true;
+  var duration = 1000 * animationsList[index][2];
+  apiSkfb.play(); 
+  apiSkfb.seekTo(0);
+  var interval = setInterval(function () {
+    apiSkfb.getCurrentTime(function(err, time){ 
+      if (time <= duration) {
+        console.log(time, duration);
+        animationChangePlay = false;
+        apiSkfb.pause();
+        clearInterval(interval);
+      }   
+    });    
+  }, duration-5);
+
+}
+
+
