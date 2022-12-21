@@ -204,6 +204,12 @@
     aspect-ratio: 83/54;
     /*rox-shadow: 0 8px 16px 0 rgba(155, 144, 255, 0.2), 0 6px 20px 0 rgba(96, 152, 255, 0.3);*/
   }
+  .rim-img {
+    margin: 7px;
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+  }
 
 }
 
