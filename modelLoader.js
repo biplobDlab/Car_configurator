@@ -11,7 +11,6 @@ var error = function error() {
 
 // scatchfab api
 let api;
-
 // material
 let material;
 
@@ -69,6 +68,20 @@ const Midliner = {
   }
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _pollTime, duration;
 
 var timeSlider;
@@ -78,10 +91,6 @@ var current_anim;
 var apiSkfb;
 //my code
 var allMatrials = [];
-var seatMatrial;
-var bodyMatrial;
-var renderChagnel;
-var nodes;
 _pollTime = function pollTime() {
   apiSkfb.getCurrentTime(function (err, time) {
     if (!isSeeking) {
@@ -94,6 +103,14 @@ _pollTime = function pollTime() {
 
 var pingpong = false;
 var timeFactor = 1.0;
+var time;
+
+
+
+
+
+
+
 
 var success = function success(api) {
   apiSkfb = api;
@@ -105,14 +122,27 @@ var success = function success(api) {
       api.getAnimations(function (err, animations) {
         console.log(animations);
         animationsList = animations;
+        current_anim = 1;
         api.pause();
+        var checkbox = document.querySelectorAll('input[type="checkbox"]');
+        for (let j = 0; j < checkbox.length; j++) {
+          checkbox[j].addEventListener('change', function () {
+            if (checkbox[j].checked) 
+            {
+              changeAnimation(1);
+            }
+            else 
+            {
+              changeAnimation(0);
+              
+            }
+          });
+        }
       });
 
       api.getMaterialList((err, materials) => {
-        material = materials[5]; // There's only one material in this case
+        //material = materials[5]; // There's only one material in this case
         allMatrials = materials;
-        console.log(allMatrials[0].channels.AlbedoPBR.color);
-        console.log(allMatrials);
 
         for (const texture in Seat) {
           api.addTexture(Seat[texture].url, (err, uid) => {
@@ -122,7 +152,7 @@ var success = function success(api) {
               window.console.log(`Registered new texture, ${Seat[texture].name}, uid: ${uid}`);
 
               //var elements = document.getElementsByClassName(`texture-${texture}`);
-              
+
             }
           });
         }
@@ -134,7 +164,7 @@ var success = function success(api) {
               window.console.log(`Registered new texture, ${Midliner[texture].name}, uid: ${uid}`);
 
               //var elements = document.getElementsByClassName(`texture-${texture}`);
-              
+
             }
           });
         }
@@ -146,7 +176,7 @@ var success = function success(api) {
               window.console.log(`Registered new texture, ${Headliner[texture].name}, uid: ${uid}`);
 
               //var elements = document.getElementsByClassName(`texture-${texture}`);
-              
+
             }
           });
         }
@@ -156,27 +186,13 @@ var success = function success(api) {
         if (!err) {
           console.log(nodes);
           document.getElementById("rim1").onclick();
+          document.getElementById("texture1").onclick();
+          document.getElementById("Blue1").onclick();
         }
       });
-
-      // buttons start here
-      var checkbox = document.querySelectorAll('input[type="checkbox"]');
-      for (let j = 0; j < checkbox.length; j++) {
-        checkbox[j].addEventListener('change', function () {
-          if (checkbox[j].checked) {
-            //api.play();
-            OpenGates(false);
-          }
-          else {
-            //api.pause();
-            OpenGates(true);
-          }
-        });
-
-      }
-
+      // Animations start here
       api.addEventListener('animationEnded', function () {
-        api.pause();
+        
       });
     });
   });
@@ -194,21 +210,26 @@ client.init(uid, {
 function colorCheck(e) {
   console.log(e.id);
   var text = e.id;
-  //text = text.slice(0, -1);
+  text = text.slice(0, -1);
   var buttons = document.getElementsByClassName("color-button");
   for (let j = 0; j < buttons.length; j++) {
     var currentid = buttons[j].id;
-    //currentid = currentid.slice(0, -1);
+    currentid = currentid.slice(0, -1);
     if (currentid === text) {
-      e.style.border = "solid 3px rgba(255, 255, 255, 1)";
-      document.getElementById(text + "-child").style.opacity = 1;
-      //convert
+      //e.style.border = "solid 3px rgba(255, 255, 255, 1)";
+      document.getElementById(text + "1").style.border = "solid 3px rgba(255, 255, 255, 1)";
+      document.getElementById(text + "2").style.border = "solid 3px rgba(255, 255, 255, 1)";
+
+      document.getElementById(text + "1-child").style.opacity = 1;
+      document.getElementById(text + "2-child").style.opacity = 1;
+
       console.log(e.getAttribute("color"));
       ChangeColor(e.getAttribute("color"));
     }
     else {
       buttons[j].style.border = "solid 3px rgba(255, 255, 255, 0)";
-      document.getElementById(buttons[j].id + "-child").style.opacity = 0;
+      document.getElementById(currentid + "1-child").style.opacity = 0;
+      document.getElementById(currentid + "2-child").style.opacity = 0;
     }
   }
 
@@ -254,56 +275,46 @@ function rimCheck(e) {
 
 }
 
-function colorConfig(e, t) {
-  
-  var n = 2.4;
-  function a(e) {
-      var t = 0;
-      return e < .04045 ? e >= 0 && (t = e * (1 / 12.92)) : t = Math.pow((e + .055) * (1 / 1.055), n),
-      t
-  }
-  t.srgbToLinear = function(e, t) {
-      var r = t || new Array(e.length);
-      if (!(e.length > 2 && e.length < 5))
-          throw new Error("Invalid color. Expected 3 or 4 components, but got " + e.length);
-      return r[0] = a(e[0]),
-      r[1] = a(e[1]),
-      r[2] = a(e[2]),
-      r.length > 3 && e.length > 3 && (r[3] = e[3]),
-      r
-  }
-  ,
-  t.hexToRgb = function(e) {
-      var t = e.match(/^#([0-9a-f]{6})$/i);
-      if (t)
-      
-          return [parseInt(t[1].substr(0, 2), 16) / 255, parseInt(t[1].substr(2, 2), 16) / 255, parseInt(t[1].substr(4, 2), 16) / 255];
-      throw new Error("Invalid color: " + e)
-  }
-
-}
+//converting hex to linier
 function hexToRgb(e) {
   var t = e.match(/^#([0-9a-f]{6})$/i);
   if (t)
-  
-      return [parseInt(t[1].substr(0, 2), 16) / 256, parseInt(t[1].substr(2, 2), 16) / 256, parseInt(t[1].substr(4, 2), 16) / 256];
+
+    return [parseInt(t[1].substr(0, 2), 16) / 256, parseInt(t[1].substr(2, 2), 16) / 256, parseInt(t[1].substr(4, 2), 16) / 256];
   throw new Error("Invalid color: " + e)
 }
+//value incription
+function a(e) {
+  var n = 2.4;
+  var t = 0;
+  return e < .04045 ?
+    e >= 0 && (t = e * (1 / 12.92)) :
+    t = Math.pow((e + .055) * (1 / 1.055), n),
+    t
+}
+
+//converting linier to argb
+function srgbToLinear(e) {
+  var r = new Array(e.length);
+  if (!(e.length > 2 && e.length < 5))
+    throw new Error("Invalid color. Expected 3 or 4 components, but got " + e.length);
+  return r[0] = a(e[0]),
+    r[1] = a(e[1]),
+    r[2] = a(e[2]),
+    r.length > 3 && e.length > 3 && (r[3] = e[3]),
+    r
+}
+
 
 function ChangeColor(color) {
-  // var sketchfabAPIUtility = new SketchfabAPIUtility(uid,  document.getElementById('api-frame'), onSketchfabUtilityReady);
-  // function onSketchfabUtilityReady() {
 
-  //   sketchfabAPIUtility.setColor("CarPaint", sketchfabAPIUtility.AlbedoPBR, color);
-   
-   
-  //  };
   let mat = allMatrials[0];
-  var a =  
-  mat.channels.AlbedoPBR.color =hexToRgb(color);
+  var hex = hexToRgb(color);
+  var srgb = srgbToLinear(hex);
+  mat.channels.AlbedoPBR.color = srgb;
   mat.channels.AlbedoPBR.enable = true;
   console.log(mat.channels.AlbedoPBR.color);
-  
+
   apiSkfb.setMaterial(mat, () => { });
 }
 
@@ -325,6 +336,7 @@ function ChangeTexture(uid1, uid2, uid3) {
   mat3.channels.AlbedoPBR.enable = true;
   apiSkfb.setMaterial(mat3, () => { });
 }
+
 function showRim(id) {
   apiSkfb.show(id, function (err) {
     if (!err) {
@@ -341,51 +353,7 @@ function hideRim(id) {
   });
 }
 
-var animaitonRunning = false;
-function OpenGates(value) {
-  if (animaitonRunning) {
-    return;
-  }
-
-  //get animation
-  if (value) {
-    //close
-    apiSkfb.setCurrentAnimationByUID(animationsList[0]);
-    apiSkfb.play();
-    animaitonRunning = true;
-    openAnimation = setInterval(() => {
-      apiSkfb.getCurrentTime(function (err, time) {
-        if (time > 4) {
-          apiSkfb.pause();
-          //clearInterval(openAnimaton);
-          animaitonRunning = false;
-        }
-      });
-    }, 7);
-  }
-  else {
-    //open
-    apiSkfb.setCurrentAnimationByUID(animationsList[1]);
-    apiSkfb.play();
-    animaitonRunning = true;
-    closeAnimation = setInterval(() => {
-      apiSkfb.getCurrentTime(function (err, time) {
-        if (time >= 7) {
-          apiSkfb.pause();
-          //clearInterval(closeAnimation);
-          animaitonRunning = false;
-        }
-      });
-
-    }, 7);
-
-    //sick to 0 time
-  }
-}
-
-
-
-
+//page buttons 
 $("#TextureSection").click(
   function textureActivate() {
     $("#TextureSection").addClass('selected');
@@ -419,3 +387,16 @@ $("#BodyPainSection").click(
     $("#TextureButotnContainer").addClass('d-none');
     return
   });
+
+  function changeAnimation(index) {
+  
+    current_anim = index;
+    apiSkfb.setCurrentAnimationByUID(animationsList[index][0]);
+    duration = animationsList[index][2];
+    apiSkfb.seekTo(0);
+    apiSkfb.play()
+    setTimeout(() => {
+        apiSkfb.pause();
+        animationChangePlay = false;
+      }, duration * 1000);
+  }
