@@ -5,7 +5,8 @@ function SketchfabAPIUtility(urlIDRef, iframeRef, clientInitObjectRef) {
   this.version = "3.0.0.3";
   this.api = null;
   this.client = null;
-  this.clientInitObject = {"merge_materials": 0,"graph_optimizer": 0 };//if you want any default init options hard coded just add them here
+  this.clientInitObject = {"merge_materials": 0,"graph_optimizer": 0 };
+  //if you want any default init options hard coded just add them here
   if (clientInitObjectRef !== null) {
       for (var prop in clientInitObjectRef) {       
           classScope.clientInitObject[prop] = clientInitObjectRef[prop];

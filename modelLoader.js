@@ -199,7 +199,7 @@ var success = function success(api) {
       });
       // Animations start here
       api.addEventListener('animationEnded', function () {
-
+        animationChangePlay = false;
       });
     });
   });
@@ -423,16 +423,21 @@ function changeAnimation(index, checkbox) {
   var duration = 1000 * animationsList[index][2];
   apiSkfb.play(); 
   apiSkfb.seekTo(0);
-  var interval = setInterval(function () {
-    apiSkfb.getCurrentTime(function(err, time){ 
-      if (time <= duration) {
-        console.log(time, duration);
-        animationChangePlay = false;
-        apiSkfb.pause();
-        clearInterval(interval);
-      }   
-    });    
-  }, duration-50);
+  apiSkfb.setCycleMode('one', function(err) {
+    if (!err) {      
+        
+    }
+});
+  // var interval = setInterval(function () {
+  //   apiSkfb.getCurrentTime(function(err, time){ 
+  //     if (time <= duration) {
+  //       console.log(time, duration);
+  //       animationChangePlay = false;
+  //       apiSkfb.pause();
+  //       clearInterval(interval);
+  //     }   
+  //   });    
+  // }, duration-50);
 
 }
 
