@@ -46,13 +46,13 @@
 
             <div class="d-flex d-md-block ">
               <button id="texture1" class="texture-button t1" style="border: solid 5px rgba(255, 255, 255, 1);"
-                onclick="textureCheck(this)">
+                onclick="textureCheck(this)" >
               </button>
               <button id="texture2" class="texture-button t2" style="border: solid 5px rgba(255, 255, 255,0);"
-                onclick="textureCheck(this)">
+                onclick="textureCheck(this)" >
               </button>
               <button id="texture3" class="texture-button t3" style="border: solid 5px rgba(255, 255, 255,0);"
-                onclick="textureCheck(this)">
+                onclick="textureCheck(this)" >
               </button>
             </div>
           </div>
@@ -63,17 +63,17 @@
             <div class="d-flex d-md-block ">
 
               <button id="Blue1" class="color-button v1" type="button"
-                style="border: solid 3px rgba(255, 255, 255, 1);" onclick="colorCheck(this)" color='#00607B'>
+                style="border: solid 3px rgba(255, 255, 255, 1);" onclick="colorCheck(this)" color='#00607B' bg = "#31444C">
                 <i class="fa fa-check align-self-center text-dark" aria-hidden="true" style="opacity: 1;"
                   id="Blue1-child"></i>
               </button>
               <button id="Gray1" class="color-button v2" type="button"
-                style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color='#404950'>
+                style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color='#404950' bg = "#404950">
                 <i class="fa fa-check align-self-center text-dark" aria-hidden="true" style="opacity: 0;"
                   id="Gray1-child"></i>
               </button>
               <button id="White1" class="color-button v3" type="button"
-                style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color='#E8E8E8'>
+                style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color='#E8E8E8' bg = "#FFFFFF">
                 <i class="fa fa-check align-self-center text-dark " aria-hidden="true" style="opacity: 0;"
                   id="White1-child"></i>
               </button>
@@ -140,8 +140,9 @@
       <div class="d-flex flex-column col-xxl-9 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 pageBackground">
         <!-- api viewer -->
         <p class="text-center title d-xxl-none d-xl-none d-lg-none d-md-block d-sm-block">Configurator</p>
-        <iframe title="Sketchfab Viewer" src="" id="api-frame" class="modelviewer" aria-placeholder="model window">
-        </iframe>
+        <!-- <iframe title="Sketchfab Viewer" src="" id="api-frame" class="modelviewer" aria-placeholder="model window" >
+        </iframe> -->
+        <iframe src="" id="api-frame" class="modelviewer" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" aria-placeholder="model window" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
         <!-- Tab view buttons -->
         <div class="row d-lg-none d-md-block">
@@ -166,13 +167,13 @@
               <!-- texture selector -->
               <div class="d-flex w-100 justify-content-center px-5 " id="TextureButotnContainer">
                 <button id="texture1" class="texture-button t1 mx-md-5 mx-sm-5"
-                  style="border: solid 5px rgba(255, 255, 255, 1);" onclick="textureCheck(this)">
+                  style="border: solid 5px rgba(255, 255, 255, 1);" onclick="textureCheck(this)" >
                 </button>
                 <button id="texture2" class="texture-button t2 mx-md-5 mx-sm-5"
-                  style="border: solid 5px rgba(255, 255, 255,0);" onclick="textureCheck(this)">
+                  style="border: solid 5px rgba(255, 255, 255,0);" onclick="textureCheck(this)" >
                 </button>
                 <button id="texture3" class="texture-button t3 mx-md-5 mx-sm-5"
-                  style="border: solid 5px rgba(255, 255, 255,0);" onclick="textureCheck(this)">
+                  style="border: solid 5px rgba(255, 255, 255,0);" onclick="textureCheck(this)" >
                 </button>
               </div>
 
@@ -181,18 +182,18 @@
               <div class="d-flex w-100 justify-content-center d-none" id="BodyPainButotnContainer">
                 
                 <button id="Blue2" class="color-button v1 mx-md-5 mx-sm-5"
-                  style="border: solid 3px rgba(255, 255, 255, 1);" onclick="colorCheck(this)" color="#00607B">
+                  style="border: solid 3px rgba(255, 255, 255, 1);" onclick="colorCheck(this)" color="#00607B" bg = "#31444C">
                   <i class="fa fa-check align-self-center text-dark" aria-hidden="true" style="opacity: 1;"
                     id="Blue2-child"></i>
                 </button>
 
                 <button id="Gray2" class="color-button v2 mx-md-5 mx-sm-5"
-                  style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color="#404950">
+                  style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color="#404950" bg = "#404950">
                   <i class="fa fa-check align-self-center text-dark" aria-hidden="true" style="opacity: 0;"
                     id="Gray2-child"></i>
                 </button>
                 <button id="White2" class="color-button v3 mx-md-5 mx-sm-5"
-                  style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color="#E8E8E8">
+                  style="border: solid 3px rgba(255, 255, 255, 0);" onclick="colorCheck(this)" color="#E8E8E8" bg = "#FFFFFF">
                   <i class="fa fa-check align-self-center text-dark " aria-hidden="true" style="opacity: 0;"
                     id="White2-child"></i>
                 </button>

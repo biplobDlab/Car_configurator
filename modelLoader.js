@@ -106,7 +106,8 @@ var timeFactor = 1.0;
 var time;
 
 
-
+var easings = ['easeLinear', 'easeOutQuad', 'easeInQuad', 'easeInOutQuad', 'easeOutCubic', 'easeInCubic', 'easeInOutCubic', 'easeOutQuart', 'easeInQuart', 'easeInOutQuart', 'easeOutQuintic', 'easeInQuintic', 'easeInOutQuintic', 'easeOutSextic', 'easeInSextic', 'easeInOutSextic', 'easeOutSeptic', 'easeInSeptic', 'easeInOutSeptic', 'easeOutOctic', 'easeInOctic', 'easeInOutOctic', 'easeOutBack', 'easeInBack', 'easeInOutBack', 'easeOutCircle', 'easeInCircle', 'easeInOutCircle', 'easeOutElastic', 'easeInElastic', 'easeInOutElastic', 'easeOutBounce', 
+'easeInBounce', 'easeInOutBounce'];
 
 
 
@@ -115,12 +116,15 @@ var time;
 var success = function success(api) {
   apiSkfb = api;
   api.start(function () {
+    
     api.addEventListener('viewerready', function () {
       ////////////////////////////////////////////
       // ANIMATION: WAIT FOR LOADING ////////////
       //////////////////////////////////////////
 
       // hide on click
+      
+      //pickEveryOtherFrame();
 
 
 
@@ -227,7 +231,9 @@ function colorCheck(e) {
       document.getElementById(text + "2-child").style.opacity = 1;
 
       console.log(e.getAttribute("color"));
-      ChangeColor(e.getAttribute("color"));
+      console.log("bg "+e.getAttribute("bg"));
+      
+      ChangeColor(e.getAttribute("color"),e.getAttribute("bg"));
     }
     else {
       buttons[j].style.border = "solid 3px rgba(255, 255, 255, 0)";
@@ -309,16 +315,20 @@ function srgbToLinear(e) {
 }
 
 
-function ChangeColor(color) {
+function ChangeColor(color, bg) {
 
   let mat = allMatrials[0];
   var hex = hexToRgb(color);
   var srgb = srgbToLinear(hex);
+  
+  var hex2 = hexToRgb(bg);
+
   mat.channels.AlbedoPBR.color = srgb;
   mat.channels.AlbedoPBR.enable = true;
   console.log(mat.channels.AlbedoPBR.color);
 
   apiSkfb.setMaterial(mat, () => { });
+  apiSkfb.setBackground({color:[hex2[0],hex2[1],hex2[2]]}, null);
 }
 
 function ChangeTexture(uid1, uid2, uid3) {
@@ -406,6 +416,7 @@ function changeAnimation(index, checkbox) {
     console.log("Returing");
     return;
   }
+
   current_anim = index;
   apiSkfb.setCurrentAnimationByUID(animationsList[index][0]);
   animationChangePlay = true;
@@ -421,8 +432,28 @@ function changeAnimation(index, checkbox) {
         clearInterval(interval);
       }   
     });    
-  }, duration-5);
+  }, duration-50);
 
 }
 
+// api.addEventListener('click', function (info) {
+//   var text = 'Clicked on ';
 
+//   if (info && info.material) {
+//     text += 'material "' + info.material.name + '"';
+//     api.highlightMaterial(info.material);
+//   } else {
+//     text += 'background';
+//     api.highlightMaterial();
+//   }
+
+//   updateText(text);
+//   console.log(text);
+//   setTimeout(function () {
+//     updateText('no click');
+//   }, 250);
+// }, {
+//   pick: 'fast'
+// });
+// });
+// };
