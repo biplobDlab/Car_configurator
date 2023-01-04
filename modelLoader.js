@@ -69,19 +69,6 @@ const Midliner = {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _pollTime, duration;
 
 var timeSlider;
@@ -106,8 +93,8 @@ var timeFactor = 1.0;
 var time;
 
 
-var easings = ['easeLinear', 'easeOutQuad', 'easeInQuad', 'easeInOutQuad', 'easeOutCubic', 'easeInCubic', 'easeInOutCubic', 'easeOutQuart', 'easeInQuart', 'easeInOutQuart', 'easeOutQuintic', 'easeInQuintic', 'easeInOutQuintic', 'easeOutSextic', 'easeInSextic', 'easeInOutSextic', 'easeOutSeptic', 'easeInSeptic', 'easeInOutSeptic', 'easeOutOctic', 'easeInOctic', 'easeInOutOctic', 'easeOutBack', 'easeInBack', 'easeInOutBack', 'easeOutCircle', 'easeInCircle', 'easeInOutCircle', 'easeOutElastic', 'easeInElastic', 'easeInOutElastic', 'easeOutBounce', 
-'easeInBounce', 'easeInOutBounce'];
+var easings = ['easeLinear', 'easeOutQuad', 'easeInQuad', 'easeInOutQuad', 'easeOutCubic', 'easeInCubic', 'easeInOutCubic', 'easeOutQuart', 'easeInQuart', 'easeInOutQuart', 'easeOutQuintic', 'easeInQuintic', 'easeInOutQuintic', 'easeOutSextic', 'easeInSextic', 'easeInOutSextic', 'easeOutSeptic', 'easeInSeptic', 'easeInOutSeptic', 'easeOutOctic', 'easeInOctic', 'easeInOutOctic', 'easeOutBack', 'easeInBack', 'easeInOutBack', 'easeOutCircle', 'easeInCircle', 'easeInOutCircle', 'easeOutElastic', 'easeInElastic', 'easeInOutElastic', 'easeOutBounce',
+  'easeInBounce', 'easeInOutBounce'];
 
 
 
@@ -116,14 +103,14 @@ var easings = ['easeLinear', 'easeOutQuad', 'easeInQuad', 'easeInOutQuad', 'ease
 var success = function success(api) {
   apiSkfb = api;
   api.start(function () {
-    
+
     api.addEventListener('viewerready', function () {
       ////////////////////////////////////////////
       // ANIMATION: WAIT FOR LOADING ////////////
       //////////////////////////////////////////
 
       // hide on click
-      
+
       //pickEveryOtherFrame();
 
 
@@ -146,9 +133,20 @@ var success = function success(api) {
           });
         }
       });
-//white background
-      api.setBackground({color:[2,2,2]}, null);
+      //white background
       api.getMaterialList((err, materials) => {
+
+
+        
+        // function hexToRgb(e) {
+        //   var t = e.match(/^#([0-9a-f]{6})$/i);
+        //   if (t)
+        
+        //     return [parseInt(t[1].substr(0, 2), 16) / 256, parseInt(t[1].substr(2, 2), 16) / 256, parseInt(t[1].substr(4, 2), 16) / 256];
+        //   throw new Error("Invalid color: " + e)
+        // }
+        //var hex2 = hexToRgb("#131B26");
+        //api.setBackground({ color: [hex2[0], hex2[1], hex2[2]] }, null);
         //material = materials[5]; // There's only one material in this case
         allMatrials = materials;
 
@@ -213,7 +211,8 @@ client.init(uid, {
   error: error,
   autostart: 1,
   preload: 1,
-  ui_controls:0
+  ui_controls: 0,
+  transparent: 1
 });
 
 function colorCheck(e) {
@@ -233,9 +232,9 @@ function colorCheck(e) {
       document.getElementById(text + "2-child").style.opacity = 1;
 
       console.log(e.getAttribute("color"));
-      console.log("bg "+e.getAttribute("bg"));
-      
-      ChangeColor(e.getAttribute("color"),e.getAttribute("bg"));
+      console.log("bg " + e.getAttribute("bg"));
+
+      ChangeColor(e.getAttribute("color"), e.getAttribute("bg"));
     }
     else {
       buttons[j].style.border = "solid 3px rgba(255, 255, 255, 0)";
@@ -322,15 +321,15 @@ function ChangeColor(color, bg) {
   let mat = allMatrials[0];
   var hex = hexToRgb(color);
   var srgb = srgbToLinear(hex);
-  
-  var hex2 = hexToRgb(bg);
+
+  // var he = hexToRgb("#131B26");
+  // var hex2 = srgbToLinear(he);
 
   mat.channels.AlbedoPBR.color = srgb;
   mat.channels.AlbedoPBR.enable = true;
   console.log(mat.channels.AlbedoPBR.color);
 
   apiSkfb.setMaterial(mat, () => { });
-  // apiSkfb.setBackground({color:[hex2[0],hex2[1],hex2[2]]}, null);
 }
 
 function ChangeTexture(uid1, uid2, uid3) {
@@ -408,8 +407,7 @@ $("#BodyPainSection").click(
 var animationChangePlay = false;
 function changeAnimation(index, checkbox) {
 
-  if(animationChangePlay)
-  {
+  if (animationChangePlay) {
     var check = checkbox.checked;
     console.log(check);
     checkbox.checked = !check;
@@ -423,13 +421,13 @@ function changeAnimation(index, checkbox) {
   apiSkfb.setCurrentAnimationByUID(animationsList[index][0]);
   animationChangePlay = true;
   var duration = 1000 * animationsList[index][2];
-  apiSkfb.play(); 
+  apiSkfb.play();
   apiSkfb.seekTo(0);
-  apiSkfb.setCycleMode('one', function(err) {
-    if (!err) {      
-        
+  apiSkfb.setCycleMode('one', function (err) {
+    if (!err) {
+
     }
-});
+  });
   // var interval = setInterval(function () {
   //   apiSkfb.getCurrentTime(function(err, time){ 
   //     if (time <= duration) {
