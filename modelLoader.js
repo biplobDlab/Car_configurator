@@ -146,7 +146,8 @@ var success = function success(api) {
           });
         }
       });
-
+//white background
+      api.setBackground({color:[2,2,2]}, null);
       api.getMaterialList((err, materials) => {
         //material = materials[5]; // There's only one material in this case
         allMatrials = materials;
@@ -211,7 +212,8 @@ client.init(uid, {
   success: success,
   error: error,
   autostart: 1,
-  preload: 1
+  preload: 1,
+  ui_controls:0
 });
 
 function colorCheck(e) {
@@ -328,7 +330,7 @@ function ChangeColor(color, bg) {
   console.log(mat.channels.AlbedoPBR.color);
 
   apiSkfb.setMaterial(mat, () => { });
-  apiSkfb.setBackground({color:[hex2[0],hex2[1],hex2[2]]}, null);
+  // apiSkfb.setBackground({color:[hex2[0],hex2[1],hex2[2]]}, null);
 }
 
 function ChangeTexture(uid1, uid2, uid3) {
