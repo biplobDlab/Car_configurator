@@ -1,4 +1,6 @@
-
+html body{
+  background-color: #131B26;
+}
 .fullFrameContainer {
   width: 100%;
   height: unset;
@@ -417,6 +419,7 @@
   }
   .subTitle2{
     margin-bottom: 0;
+    font-size: 18px;
   }
 
   .para {
